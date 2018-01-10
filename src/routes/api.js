@@ -37,7 +37,7 @@ router.post('/story', function(req, res) {
 });
 
 router.get('/comment', function(req, res) {
-    // CODE: Fetch the comments that have the parent given in the "parent" parameter
+    // CODE TGT: Fetch the comments that have the parent given in the "parent" parameter
     // Question: Do we get parent with req.body.parent or req.query.parent?
     Comment.find({ parent: /* input the parent parameter here */ }, function(err, comments) {
         res.send(comments);

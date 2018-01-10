@@ -90,11 +90,13 @@ function submitCommentHandler() {
   const commentInput = document.getElementById(this.getAttribute('story-id') + '-comment-input');
 
   const data = {
-      /* what are the parameters needed by our server? */
+      content: commentInput.value,
+      parent: this.getAttribute('story-id')
   };
 
-  post('insert api endpoint here', data);
+  post('/api/comment', data);
   // one more thing: can you guess what?
+  commentInput.value = '';
 }
 
 function newStoryDOMObject() {
@@ -106,7 +108,7 @@ function newStoryDOMObject() {
   newStoryContent.setAttribute('type', 'text');
   newStoryContent.setAttribute('placeholder', 'New Story');
   newStoryContent.className = 'form-control';
-  newStoryContent.setAttribute('id', 'story-content-input')
+  newStoryContent.setAttribute('id', 'story-content-input');
   newStoryDiv.appendChild(newStoryContent);
 
   const newStoryButtonDiv = document.createElement('div');
@@ -129,10 +131,10 @@ function submitStoryHandler() {
   const newStoryInput = document.getElementById('story-content-input');
 
   const data = {
-    /* what are the parameters needed by our server for stories? */
+      content: newStoryInput.value,
   };
 
-  post('add api endpoint here', data);
+  post('/api/story', data);
   // what is this next line doing?
   newStoryInput.value = '';
 }

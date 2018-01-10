@@ -11,6 +11,5 @@ const db = mongoose.connection;
 
 // db error handling
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-// optional connection handling: feedback for us to know that we're connected
 db.on('connected', function() { console.log('database connected'); });
 module.exports = db;

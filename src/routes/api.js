@@ -2,7 +2,7 @@
 const express = require('express');
 
 // models
-const Story = ('../models/story');
+const Story = require('../models/story');
 const Comment = require('place the path here');  // <- place path for comment.js from this directory here
 
 const router = express.Router();

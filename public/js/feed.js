@@ -49,16 +49,87 @@ function commentDOMObject(commentJSON) {
   return commentDiv;
 }
 
+function newCommentDOMObject(parent) {
+  const newCommentDiv = document.createElement('div');
+  newCommentDiv.className = 'comment input-group';
+
+  const newCommentContent = document.createElement('input');
+  newCommentContent.setAttribute('type', 'text');
+  newCommentContent.setAttribute('name', 'content');
+  newCommentContent.setAttribute('placeholder', 'New Comment');
+  newCommentContent.setAttribute('id', parent + '-comment-input');
+  newCommentContent.className = 'form-control';
+  newCommentDiv.appendChild(newCommentContent);
+
+  // here: create an input for commenting
+  const newCommentParent = document.createElement('input');
+  newCommentParent.setAttribute('type', 'hidden');
+  newCommentParent.setAttribute('name', 'parent');
+  newCommentParent.setAttribute('value', parent);
+  newCommentDiv.appendChild(newCommentParent);
+
+  const newCommentButtonDiv = document.createElement('div');
+  newCommentButtonDiv.className = 'input-group-append';
+  newCommentDiv.appendChild(newCommentButtonDiv);
+
+  const newCommentSubmit = document.createElement('button');
+  newCommentSubmit.innerHTML = 'Submit';
+  newCommentSubmit.className = 'btn btn-outline-primary';
+  newCommentSubmit.setAttribute('story-id', parent);
+  // here: event handler for when we post comments
+  // this happens when we click on the submit button
+  newCommentSubmit.addEventListener('click', submitCommentHandler);
+  newCommentButtonDiv.appendChild(newCommentSubmit);
+
+  return newCommentDiv;
+}
+
+function submitCommentHandler() {
+  // TO BE IMPLEMENTED:
+  // make a POST request to our newly implemented db and store that comment
+}
+
+function newStoryDOMObject() {
+  const newStoryDiv = document.createElement('div');
+  newStoryDiv.className = 'input-group my-3';
+
+  // input for creating a new story
+  const newStoryContent = document.createElement('input');
+  newStoryContent.setAttribute('type', 'text');
+  newStoryContent.setAttribute('placeholder', 'New Story');
+  newStoryContent.className = 'form-control';
+  newStoryContent.setAttribute('id', 'story-content-input')
+  newStoryDiv.appendChild(newStoryContent);
+
+  const newStoryButtonDiv = document.createElement('div');
+  newStoryButtonDiv.className = 'input-group-append';
+  newStoryDiv.appendChild(newStoryButtonDiv);
+
+  const newStorySubmit = document.createElement('button');
+  newStorySubmit.innerHTML = 'Submit';
+  newStorySubmit.className = 'btn btn-outline-primary';
+  // here: handler for when we submit the story
+  newStorySubmit.addEventListener('click', submitStoryHandler);
+  newStoryButtonDiv.appendChild(newStorySubmit);
+
+  return newStoryDiv;
+}
+
+function submitStoryHandler() {
+  // TO BE IMPLEMENTED:
+  // submit the story to our newly implemented database
+}
+
 function renderStories(user) {
   document.getElementById('new-story').appendChild(newStoryDOMObject());
 
   const storiesDiv = document.getElementById('stories');
-  get('<external API link>/api/stories', {}, function(storiesArr) {
+  get('/api/stories', {}, function(storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
       storiesDiv.prepend(storyDOMObject(currentStory, user));
 
-      get('<external API link>/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
+      get('/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
         for (let j = 0; j < commentsArr.length; j++) {
           const currentComment = commentsArr[j];
           const commentDiv = document.getElementById(currentComment.parent + '-comments');

@@ -50,6 +50,8 @@ function commentDOMObject(commentJSON) {
 }
 
 function renderStories(user) {
+  document.getElementById('new-story').appendChild(newStoryDOMObject());
+
   const storiesDiv = document.getElementById('stories');
   get('<external API link>/api/stories', {}, function(storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {

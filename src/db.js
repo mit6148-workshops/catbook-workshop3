@@ -5,7 +5,7 @@ const mongoURL = "mongodb://robertv:qwerty123@ds251287.mlab.com:51287/catbookdb"
 const options = {
     useMongoClient: true
 };
-mongoose.connet(mongoURL, options);
+mongoose.connect(mongoURL, options);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 

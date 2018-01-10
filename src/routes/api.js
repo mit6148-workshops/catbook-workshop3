@@ -34,6 +34,10 @@ router.get('/stories', function(req, res) {
 router.post('/story', function(req, res) {
     // CODE TGT: Create a new story with the "content" parameter
     // Question: Do we get content with req.body.content or req.query.content?
+    
+    // Save the story
+    
+    // Send an empty response
 });
 
 router.get('/comment', function(req, res) {

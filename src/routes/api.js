@@ -3,7 +3,7 @@ const express = require('express');
 
 // models
 const Story = ('../models/story');
-const Comment = require('place the path here');  // <- place path for comment.js from this directory here
+const Comment = require('../models/comment');  
 
 const router = express.Router();
 
@@ -26,24 +26,32 @@ router.get('/user', function(req, res) {
 
 
 router.get('/stories', function(req, res) {
-    // CODE TGT: 
-    // Find all the stories in the database
-    // Send an empty response: this is necessary
+    Story.find({}, function(err, stories) {
+        res.send(stories);
+    });
 });
 
 router.post('/story', function(req, res) {
     // CODE TGT: Create a new story with the "content" parameter
-    // Question: Do we get content with req.body.content or req.query.content?
-    
+    // Question: Do we get content with req.body.content or req.query.content? 
+    // req.body because this is a post request
+    const newStory = new Story({
+        'creator_id': 'anonid',
+        'creator_name': 'Anonymous',
+        'content': req.body.content
+    });
     // Save the story
-    
+    newStory.save(function(err, story) {
+        if (err) console.log(err);
+    });
     // Send an empty response
+    res.send({});
 });
 
 router.get('/comment', function(req, res) {
     // CODE TGT: Fetch the comments that have the parent given in the "parent" parameter
     // Question: Do we get parent with req.body.parent or req.query.parent?
-    Comment.find({ parent: /* input the parent parameter here */ }, function(err, comments) {
+    Comment.find({ parent: req.query.parent }, function(err, comments) {
         res.send(comments);
     });
 });
@@ -53,12 +61,14 @@ router.post('/comment', function(req, res) {
     const newComment = new Comment({
         'creator_id':'anonid',
         'creator_name':'Anonymous',
-        'parent': /* remove this comment and add the parameter "parent" from the request */,
-        'content': /* remove this comment and add the parameter "content" from the request */
+        'parent': req.body.parent, 
+        'content': req.body.content 
     });
 
     // CODE: save the comment
-    // your code goes here
+    newComment.save(function(err, comment) {
+        if (err) console.log(err);
+    });
     
     res.send({});
 });

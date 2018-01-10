@@ -2,8 +2,8 @@
 const express = require('express');
 
 // models
-const Story = ('../models/story');
-const Comment = require('../models/comment');  
+const Story = require('../models/story');
+const Comment = require('../models/comment');
 
 const router = express.Router();
 

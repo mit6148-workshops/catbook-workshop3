@@ -87,6 +87,14 @@ function newCommentDOMObject(parent) {
 function submitCommentHandler() {
   // TO BE IMPLEMENTED:
   // make a POST request to our newly implemented db and store that comment
+  const commentInput = document.getElementById(this.getAttribute('story-id') + '-comment-input');
+
+  const data = {
+      /* what are the parameters needed by our server? */
+  };
+
+  post('insert api endpoint here', data);
+  // one more thing: can you guess what?
 }
 
 function newStoryDOMObject() {
@@ -118,6 +126,15 @@ function newStoryDOMObject() {
 function submitStoryHandler() {
   // TO BE IMPLEMENTED:
   // submit the story to our newly implemented database
+  const newStoryInput = document.getElementById('story-content-input');
+
+  const data = {
+    /* what are the parameters needed by our server for stories? */
+  };
+
+  post('add api endpoint here', data);
+  // what is this next line doing?
+  newStoryInput.value = '';
 }
 
 function renderStories(user) {

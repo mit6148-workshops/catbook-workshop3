@@ -141,6 +141,7 @@ function submitStoryHandler() {
 }
 
 function renderStories(user) {
+  // allows to post new stories!
   document.getElementById('new-story').appendChild(newStoryDOMObject());
 
   const storiesDiv = document.getElementById('stories');

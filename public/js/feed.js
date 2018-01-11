@@ -27,6 +27,9 @@ function storyDOMObject(storyJSON, user) {
   commentsDiv.className = 'story-comments';
   cardFooter.appendChild(commentsDiv);
 
+  // allows new comments to a story
+  cardFooter.appendChild(newCommentDOMObject(storyJSON._id));
+
   return card;
 }
 

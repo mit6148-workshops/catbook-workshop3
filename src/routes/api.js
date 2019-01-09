@@ -28,7 +28,7 @@ router.get('/user', function(req, res) {
 router.get('/stories', function(req, res) {
     // CODE TGT: 
     // Find all the stories in the database
-    // Send an empty response: this is necessary
+    // Send response containing stories
 });
 
 router.post('/story', function(req, res) {
